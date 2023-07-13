@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3 uid="uid://b37y7xavtxamj"]
+
+[ext_resource type="Script" path="res://Char.gd" id="1_apvey"]
+[ext_resource type="Material" uid="uid://sckwu0omnju3" path="res://CharMat.tres" id="2_yao3h"]
+[ext_resource type="BoxMesh" uid="uid://b1b6mw53s4yrb" path="res://Head.tres" id="3_uuktv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b0pjf"]
+
+[sub_resource type="Sky" id="Sky_y0m58"]
+sky_material = SubResource("ProceduralSkyMaterial_b0pjf")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_2tmyv"]
+background_mode = 2
+sky = SubResource("Sky_y0m58")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ssr_enabled = true
+ssr_fade_out = 1.68179
+ssr_depth_tolerance = 0.21
+ssao_enabled = true
+ssao_sharpness = 1.0
+ssil_enabled = true
+glow_enabled = true
+glow_bloom = 0.07
+fog_enabled = true
+fog_density = 0.0211
+fog_sky_affect = 0.063
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_36pmv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgdws"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(14, 21)
+material = ExtResource("2_yao3h")
+add_uv2 = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_deq3p"]
+height = 1.0
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhh70"]
+transparency = 4
+vertex_color_is_srgb = true
+albedo_color = Color(0.0980392, 0.768627, 0, 1)
+metallic = 0.35
+metallic_specular = 0.54
+ao_enabled = true
+subsurf_scatter_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3t0or"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_hhh70")
+add_uv2 = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ft40w"]
+size = Vector3(10, 1, 10)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2tmyv")
+camera_attributes = SubResource("CameraAttributesPhysical_36pmv")
+
+[node name="TerrainTest" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.805233, 0.38498, -0.450987, 0.187569, 0.556141, 0.809645, 0.56251, -0.736545, 0.375613, 0, 6.28883, 0)
+light_energy = 1.293
+shadow_enabled = true
+
+[node name="Char" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19741, 0.515706)
+script = ExtResource("1_apvey")
+
+[node name="Camera3D" type="Camera3D" parent="Char"]
+transform = Transform3D(1, 0, 0, 0, 0.942046, 0.335484, 0, -0.335484, 0.942046, 2.38419e-07, 1.8115, 5.17356)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Char"]
+transform = Transform3D(1, 0, 0, 0, 0.78, 0, 0, 0, 1, 0, 0.0972452, 0)
+mesh = SubResource("BoxMesh_mgdws")
+skeleton = NodePath("../../Floor/MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Char/MeshInstance3D2"]
+transform = Transform3D(0.63, 0, 0, 0, 0.385, 0, 0, 0, 0.195, 0, 0.191472, -0.567285)
+mesh = ExtResource("3_uuktv")
+skeleton = NodePath("../../../Floor/MeshInstance3D")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Char/MeshInstance3D2"]
+transform = Transform3D(0.4, 0, 0, 0, 0.8, 0, 0, 0, 0.4, -0.29, -0.4, 0)
+mesh = SubResource("BoxMesh_mgdws")
+skeleton = NodePath("../../Floor/MeshInstance3D")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Char/MeshInstance3D2"]
+transform = Transform3D(0.4, 0, 0, 0, 0.8, 0, 0, 0, 0.4, 0.29, -0.4, 0)
+mesh = SubResource("BoxMesh_mgdws")
+skeleton = NodePath("../../../Floor/MeshInstance3D")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Char/MeshInstance3D2"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.2, 0, 0, 0.56658)
+mesh = SubResource("BoxMesh_mgdws")
+skeleton = NodePath("../../../Floor/MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Char"]
+shape = SubResource("CylinderShape3D_deq3p")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_3t0or")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_ft40w")
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.52062, 0.445339, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_3t0or")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_ft40w")

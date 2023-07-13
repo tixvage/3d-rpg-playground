@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://sckwu0omnju3"]
+
+[resource]
+transparency = 4
+albedo_color = Color(0.984314, 0.396078, 0.635294, 1)
+metallic = 0.46
+metallic_specular = 0.74
+roughness = 0.44
+emission = Color(1, 0, 1, 1)
+emission_energy_multiplier = 4.16
+normal_enabled = true
+anisotropy_enabled = true
+ao_enabled = true
+subsurf_scatter_enabled = true
+backlight_enabled = true
+refraction_enabled = true

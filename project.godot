@@ -11,5 +11,25 @@ config_version=5
 [application]
 
 config/name="3d-rpg-playground"
+run/main_scene="res://test_scene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+
+[dotnet]
+
+project/assembly_name="3d-rpg-playground"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
+
+[rendering]
+
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=4
+reflections/sky_reflections/roughness_layers=16
+anti_aliasing/quality/use_taa=true
