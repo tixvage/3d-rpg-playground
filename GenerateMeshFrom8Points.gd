@@ -1,15 +1,14 @@
 extends MeshInstance3D
 
-
 func createMesh(pointArray:Array):
-	#
-	#         7
+	#				 
+	#         7		 
 	# 4             6
-	#       5
-	#
-	#         3
+	#       5		 
+	#				 
+	#         3		 
 	# 0             2
-	#       1
+	#       1		 
 	# Numbers of the voxels!
 	
 	pointArray[0] = 1
@@ -20,7 +19,7 @@ func createMesh(pointArray:Array):
 	pointArray[5] = 0
 	pointArray[6] = 0
 	pointArray[7] = 0
-	
+
 	var vertices = PackedVector3Array()
 	
 	
@@ -42,11 +41,23 @@ func createMesh(pointArray:Array):
 	
 	tmpMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
-	mesh = tmpMesh
+	#0001
 	
-	pass
+	mesh = tmpMesh
+	var path = ""
+	for p in pointArray:
+		var i = 1
+		while p > 10:
+			p -= p % 10
+			p = p / 10
+			i += 1
+		for j in 4 - i:
+			path += "0"
+		path += str(p) + "-"
+	path = path.left(path.length() - 1)
+	ResourceSaver.save(tmpMesh, "res://GeneratedMesh/Floor/" + path + ".tres")
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	createMesh([0,0,0,0,0,0,0,0])
 	pass # Replace with function body.

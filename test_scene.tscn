@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b37y7xavtxamj"]
+[gd_scene load_steps=7 format=3 uid="uid://dhs6l5kk6xenf"]
 
 [ext_resource type="Script" path="res://GenerateMeshFrom8Points.gd" id="1_2ukgp"]
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="2_xepbf"]
